@@ -1,0 +1,32 @@
+#cloud-config
+autoinstall:
+  version: 1
+
+  locale: en_US.UTF-8
+
+  keyboard:
+    layout: us
+
+  identity:
+    hostname: linux-demo
+    username: student
+    password: "THIS_IS_A_HASH_PASSWORD"
+
+  storage:
+    layout:
+      name: direct
+
+  ssh:
+    install-server: true
+    allow-pw: true
+
+  packages:
+    - git
+    - curl
+    - vim
+    - nginx
+
+  updates: security
+
+  late-commands:
+    - curtin in-target --target=/target -- systemctl enable nginx
